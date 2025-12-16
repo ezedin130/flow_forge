@@ -1,0 +1,17 @@
+spring:
+  application:
+    name:flow_forge
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/flow_forge
+    username: root
+    password: 'root'
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: false
+        dialect: org.hibernate.dialect.MySQLDialect
