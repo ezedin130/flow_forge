@@ -29,7 +29,7 @@ public class TenantController {
         TenantOutDto result = service.createTenant(dto);
         return ResponseEntity.ok(result);
     }
-    @GetMapping("/tenant")
+    @GetMapping()
     public ResponseEntity<List<TenantOutDto>> getAllTenants() {
         List<TenantOutDto> result = service.getAllTenants();
         return ResponseEntity.ok(result);
