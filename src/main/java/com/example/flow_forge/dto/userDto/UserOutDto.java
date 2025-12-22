@@ -9,6 +9,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Data
 public class UserOutDto {
@@ -21,4 +22,5 @@ public class UserOutDto {
     private Boolean isActive;
     private LocalDateTime createdAt;
     private Long tenant;
+    private Set<Long> roleIds;
 }

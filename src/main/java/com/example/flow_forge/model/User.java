@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Data
@@ -38,8 +39,11 @@ public class User {
     @JoinColumn(name = "tenant_id")
     private Tenant tenant;
     //todo: the relationship between user and role should be implemented once role entity is implemented
-    //@NotNull(message = "role is required")
-    //    @ManyToMany(fetch = FetchType.LAZY)
-    //    @JoinColumn(name = "role_id")
-    //    private Role role;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles;
 }
