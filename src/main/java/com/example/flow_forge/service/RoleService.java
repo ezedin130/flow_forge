@@ -25,7 +25,7 @@ public class RoleService {
     private final TenantRepository tenantRepository;
 
     public RoleOutDto createRole(RoleInDto dto){
-        Tenant tenant = tenantRepository.findById(dto.getTenant())
+        Tenant tenant = tenantRepository.findById(dto.getTenantId())
                 .orElseThrow(()-> new RuntimeException("Tenant not found"));
         Role role = mapper.toEntity(dto,tenant);
         Role savedRole = roleRepository.save(role);
