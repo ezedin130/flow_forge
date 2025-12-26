@@ -19,16 +19,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class UserMapper {
-    @Autowired
-    private final RoleRepository roleRepository;
     public User toEntity(UserInDto dto, Tenant tenant){
-        Set<Role> roles = new HashSet<>();
-        if (dto.getRoleIds() != null) {
-            roles = dto.getRoleIds().stream()
-                    .map(id -> roleRepository.findById(id)
-                            .orElseThrow(() -> new RuntimeException("Role with ID " + id + " not found")))
-                    .collect(Collectors.toSet());
-        }
         return User.builder()
                 .firstName(dto.getFirstName())
                 .lastName(dto.getLastName())
@@ -36,13 +27,9 @@ public class UserMapper {
                 .createdAt(LocalDateTime.now())
                 .isActive(false)
                 .tenant(tenant)
-                .roles(roles)
                 .build();
     }
     public UserOutDto toDto(User user){
-        Set<Long> roleIds = new HashSet<>(user.getRoles()).stream()
-                .map(Role::getId)
-                .collect(Collectors.toSet());
         UserOutDto dto = new UserOutDto();
         dto.setId(user.getId());
         dto.setFirstName(user.getFirstName());
@@ -53,7 +40,6 @@ public class UserMapper {
         dto.setIsActive(user.getIsActive());
         dto.setTenant(user.getTenant().getId());
         dto.setCreatedAt(user.getCreatedAt());
-        dto.setRoleIds(roleIds);
         return dto;
     }
 }

@@ -22,5 +22,4 @@ public class UserOutDto {
     private Boolean isActive;
     private LocalDateTime createdAt;
     private Long tenant;
-    private Set<Long> roleIds;
 }

@@ -10,5 +10,4 @@ public class UserInDto {
     private String lastName;
     private String email;
     private Long tenantId;
-    private Set<Long> roleIds;
 }
